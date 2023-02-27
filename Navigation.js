@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 // Screens
 import WelcomeScreen from "./screens/WelcomeScreen";
 import LoginScreen from "./screens/LoginScreen";
+import MenuScreen from "./screens/MenuScreen";
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,7 @@ function MainStack() {
     >
       <Stack.Screen name="Welcome" component={WelcomeScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Menu" component={MenuScreen} />
     </Stack.Navigator>
   );
 }

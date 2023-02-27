@@ -19,8 +19,8 @@ export default function LoginScreen({ navigation }) {
     Roboto: require("../assets/fonts/Roboto-Regular.ttf"),
   });
 
-  const [name, setName] = useState("Jose Carlos");
-  const [password, setPassword] = useState("123456");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(true);
 
   return (
@@ -59,7 +59,6 @@ export default function LoginScreen({ navigation }) {
             autoCapitalize="none"
             autoCorrect={false}
             textContentType="newPassword"
-            // secureTextEntry
             secureTextEntry={passwordVisible}
             enablesReturnKeyAutomatically
           />
@@ -80,14 +79,11 @@ export default function LoginScreen({ navigation }) {
       </SafeAreaView>
 
       <TouchableOpacity
-        onPress={() => navigation.navigate("Login")}
+        onPress={() => navigation.navigate("Menu")}
         className="mt-10 bg-background-dark px-20 py-4 rounded-xl"
       >
         <Text className="text-white font-medium">Iniciar Sesión</Text>
       </TouchableOpacity>
-
-      {/* Introduce el Nombre */}
-
       <StatusBar style="auto" />
     </View>
   );
