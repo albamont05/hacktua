@@ -5,7 +5,7 @@ import { Text, View, TouchableOpacity, Image } from "react-native";
 // Fonts
 import { useFonts } from "expo-font";
 
-export default function WelcomeScreen({navigation}) {
+export default function WelcomeScreen({ navigation }) {
   const [fontsLoaded] = useFonts({
     Roboto: require("../assets/fonts/Roboto-Regular.ttf"),
   });
@@ -41,7 +41,7 @@ export default function WelcomeScreen({navigation}) {
       <View className="flex flex-row mt-5">
         <Text className="text-slate-400 mr-2">¿No tienes una cuenta?</Text>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("Register")}>
           <Text className="text-background-dark">Crear Cuenta</Text>
         </TouchableOpacity>
       </View>

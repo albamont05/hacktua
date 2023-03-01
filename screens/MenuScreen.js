@@ -4,7 +4,7 @@ import { Text, View, TouchableOpacity, Image } from "react-native";
 // Fonts
 import { useFonts } from "expo-font";
 
-export default function MenuScreen() {
+export default function MenuScreen({ navigation}) {
     const [fontsLoaded] = useFonts({
         Roboto: require("../assets/fonts/Roboto-Regular.ttf"),
     });
@@ -31,7 +31,10 @@ export default function MenuScreen() {
                 {/* Container Buttons */}
                 <View className="mt-12 w-[85%]">
                     {/* BUTTON NUTRITION */}
-                    <TouchableOpacity className="my-1.5">
+                    <TouchableOpacity 
+                    onPress={() => navigation.navigate("Nutrition")}
+                    className="my-1.5"
+                    >
                         <View className="flex flex-row items-center justify-center rounded-r-xl">
                             <View className={`h-16 w-2 rounded-l-xl bg-green-dark`}></View>
                             <View className={`h-16 w-[98%] flex flex-row items-center justify-center rounded-r-xl bg-green-light`}>
@@ -107,7 +110,7 @@ export default function MenuScreen() {
                                     Trabajo
                                 </Text>
                                 <Image
-                                    className="h-7 w-7"
+                                    className="h-7 w-[30px]"
                                     source={require("../assets/images/black_icons/computer.png")}
                                 />
                             </View>

@@ -35,10 +35,10 @@ export default function LoginScreen({ navigation }) {
 
       <SafeAreaView className="w-[80%]">
         <Text className="mb-2 text-base font-medium italic text-slate-400">
-          Introduce el Nombre
+          Introduce el nombre
         </Text>
 
-        <View className="flex flex-row justify-between items-center bg-white shadow-xl shadow-gray-500 rounded-xl px-3 py-2">
+        <View className="flex flex-row justify-between items-center bg-white shadow-lg shadow-gray-400 rounded-xl px-3 py-2">
           <TextInput
             className="italic font-semibold w-[90%]"
             onChangeText={(newText) => setName(newText)}
@@ -50,7 +50,7 @@ export default function LoginScreen({ navigation }) {
           Introduce la contraseña
         </Text>
 
-        <View className="flex flex-row justify-between items-center bg-white shadow-xl shadow-gray-500 rounded-xl px-3 py-2">
+        <View className="flex flex-row justify-between items-center bg-white shadow-lg shadow-gray-400 rounded-xl px-3 py-2">
           <TextInput
             className="italic font-semibold w-[90%]"
             onChangeText={(newText) => setPassword(newText)}
