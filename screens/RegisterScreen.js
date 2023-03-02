@@ -247,12 +247,4 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderColor: 0,
   },
-
-  text: {
-    fontSize: 25,
-    color: 'red',
-    padding: 3,
-    marginBottom: 10,
-    textAlign: 'center'
-  },
 });

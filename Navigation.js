@@ -13,7 +13,7 @@ const Stack = createStackNavigator();
 function MainStack() {
   return (
     <Stack.Navigator
-      initialRouteName="Register"
+      initialRouteName="Welcome"
       screenOptions={{
         headerShown: false,
       }}

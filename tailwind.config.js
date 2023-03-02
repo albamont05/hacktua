@@ -23,6 +23,12 @@ module.exports = {
         'green-dark': '#79E4A4',
         'green-light': '#E4FBEB',
       },
+
+      spacing: {
+        '82': '21rem',
+        '86': '22rem',
+        '88': '23rem',
+      }
     },
   },
   plugins: [],
