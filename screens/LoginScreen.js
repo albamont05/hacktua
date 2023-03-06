@@ -8,7 +8,6 @@ import {
   Image,
   SafeAreaView,
   TextInput,
-  Button,
 } from "react-native";
 
 // Fonts
@@ -70,8 +69,8 @@ export default function LoginScreen({ navigation }) {
               className="h-4 w-5"
               source={
                 passwordVisible
-                  ? require("../assets/images/iconos-footer/eye-remove.png")
-                  : require("../assets/images/iconos-footer/eye-active.png")
+                  ? require("../assets/images/footer_icons/eye-remove.png")
+                  : require("../assets/images/footer_icons/eye-active.png")
               }
             />
           </TouchableOpacity>
