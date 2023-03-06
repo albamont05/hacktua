@@ -15,7 +15,7 @@ import {
 import { SelectList } from "react-native-dropdown-select-list";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Moment from "moment";
-import { Formik, Form, Field } from "formik";
+import { Formik } from "formik";
 import * as yup from "yup";
 
 // Fonts
@@ -104,7 +104,7 @@ export default function RegisterScreen({ navigation }) {
   });
 
   return (
-    <View className="flex-1 b-white">
+    <View className="flex-1">
       <Formik
         validationSchema={registerValidationSchema}
         initialValues={{
@@ -122,14 +122,7 @@ export default function RegisterScreen({ navigation }) {
         }}
         onSubmit={(values) => navigation.navigate("Menu")}
       >
-        {({
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          values,
-          errors,
-          touched,
-        }) => (
+        {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
           <SafeAreaView className="flex-1">
             <ScrollView className="flex-1">
               <View
