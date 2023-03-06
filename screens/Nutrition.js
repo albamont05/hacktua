@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { Text, View, TouchableOpacity, Image, SafeAreaView, ScrollView } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
-
+import TabBar from '../components/TabBar';
 // Fonts
 import { useFonts } from "expo-font";
 
@@ -11,7 +11,7 @@ export default function NutritionScreen({ navigation }) {
     });
 
     return (
-        <View className="flex-1 bg-background-dark">
+        <View className="flex-1 bg-background-ark">
             <SafeAreaView className="flex-1">
                 <ScrollView className="flex-1">
                     <View
@@ -29,7 +29,7 @@ export default function NutritionScreen({ navigation }) {
                         <View className="flex-1 items-center w-full -mt-7 rounded-t-3xl bg-white"
                         >
                             <LinearGradient
-                                className="flex-1 items-center w-full rounded-t-3xl"
+                                className="flex-1 items-center w-full rounded-t-3xl relative pb-10"
                                 colors={['rgba(255,255,255,1)', 'rgba(45,49,66,0.1)']}
                                 start={{ x: 0, y: 0 }}
                                 end={{ x: 0, y: 1 }}
@@ -402,82 +402,16 @@ export default function NutritionScreen({ navigation }) {
                                         </View>
                                     </TouchableOpacity>
                                     {/* END BADGE */}
-
                                 </View>
                                 {/* END OBJECTIVE CARD */}
-
-                                {/* TAB_BAR */}
-                                <View
-                                    className="flex flex-row justify-between items-center bg-whit mt-6 inset-x-0 bottom-0 h-20 w-full rounded-t-3xl"
-                                >
-                                    {/* BUTTONS */}
-                                    <View className="flex flex-row items-center bg-white h-20 pl-6 pr-2 -mr-1 rounded-t-3xl">
-                                        {/* CHECK */}
-                                        <TouchableOpacity>
-                                            <Image
-                                                className="h-[25px] w-[25px]"
-                                                source={require("../assets/images/footer_icons/check.png")}
-                                            />
-                                        </TouchableOpacity>
-
-                                        {/* SEARCH */}
-                                        <TouchableOpacity
-                                            className="ml-9 mr-5"
-                                        >
-                                            <Image
-                                                className="h-[25px] w-[25px]"
-                                                source={require("../assets/images/footer_icons/search.png")}
-                                            />
-                                        </TouchableOpacity>
-
-                                    </View>
-
-                                    {/* BUTTON HOME CURVE */}
-                                    <View
-                                        className="bg-white pb-8 mt-4 "
-                                    >
-                                        {/* HOME */}
-                                        <TouchableOpacity
-                                            onPress={() => navigation.navigate("Menu")}
-                                            className="p-6 -mt-16 rounded-full bg-background-dark border-8 border-[#EAECF0]"
-                                        >
-                                            <Image
-                                                className="h-[28px] w-[28px]"
-                                                source={require("../assets/images/footer_icons/home.png")}
-                                            />
-                                        </TouchableOpacity>
-                                    </View>
-                                    {/* END BUTTON HOME CURVE */}
-
-                                    <View className="flex flex-row items-center bg-white h-20 pr-6 pl-2 -ml-1 rounded-t-3xl">
-                                        {/* STAR */}
-                                        <TouchableOpacity
-                                            className="ml-5 mr-9"
-                                        >
-                                            <Image
-                                                className="h-[25px] w-[25px]"
-                                                source={require("../assets/images/footer_icons/star.png")}
-                                            />
-                                        </TouchableOpacity>
-
-                                        {/* USER */}
-                                        <TouchableOpacity
-                                            className=""
-                                        >
-                                            <Image
-                                                className="h-[25px] w-[25px]"
-                                                source={require("../assets/images/footer_icons/user.png")}
-                                            />
-                                        </TouchableOpacity>
-                                        {/* END BUTTTONS */}
-                                    </View>
-                                </View>
-                                {/* END TAB_BAR */}
                             </LinearGradient>
                         </View>
                         {/* END BODY */}
                     </View>
                 </ScrollView>
+                {/* TAB_BAR */}
+                <TabBar action={navigation} />
+                {/* END TAB_BAR */}
             </SafeAreaView>
         </View>
     );
