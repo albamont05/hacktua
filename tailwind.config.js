@@ -22,13 +22,15 @@ module.exports = {
         'blue-light': '#E7FAFE',
         'green-dark': '#79E4A4',
         'green-light': '#E4FBEB',
+        'gray-light': '#F5FAFA',
       },
 
       spacing: {
         '82': '21rem',
         '86': '22rem',
         '88': '23rem',
-      }
+      },
+
     },
   },
   plugins: [],

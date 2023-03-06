@@ -1,13 +1,14 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 
-// Screens
+// Screens for Stack
 import WelcomeScreen from "./screens/WelcomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import MenuScreen from "./screens/MenuScreen";
 import NutritionScreen from "./screens/Nutrition";
 
+// Stack
 const Stack = createStackNavigator();
 
 function MainStack() {
