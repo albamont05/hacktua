@@ -38,7 +38,7 @@ export default function WelcomeScreen({ navigation }) {
         <Text className="text-white">Iniciar Sesión</Text>
       </TouchableOpacity>
 
-      <View className="flex flex-row mt-5">
+      <View className="flex flex-row justify-center mt-5">
         <Text className="text-slate-400 mr-2">¿No tienes una cuenta?</Text>
 
         <TouchableOpacity onPress={() => navigation.navigate("Register")}>
