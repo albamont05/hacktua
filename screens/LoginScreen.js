@@ -37,10 +37,11 @@ export default function LoginScreen({ navigation }) {
   });
 
   const LoginValidationSchema = yup.object().shape({
-    name: yup.string().required("El nombre es requiredo"),
-    password: yup.string()
-    .min(6, "La contraseña debe contener 6 caracteres")
-    .required("La contraseña es requerida"),
+    name: yup.string().required("El nombre es requerido"),
+    password: yup
+      .string()
+      .min(6, "La contraseña debe contener 6 caracteres")
+      .required("La contraseña es requerida"),
   });
 
   return (
@@ -57,7 +58,7 @@ export default function LoginScreen({ navigation }) {
         onSubmit={(values) => navigation.navigate("Menu")}
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
-          <View>
+          <View className="flex justify-center items-center">
             <Image
               className="mt-6 mb-10 h-[40px] w-[210px]"
               source={require("../assets/images/logo-bg-removed.png")}
@@ -124,6 +125,16 @@ export default function LoginScreen({ navigation }) {
             >
               <Text className="text-white font-medium">Iniciar Sesión</Text>
             </TouchableOpacity>
+
+            <View className="flex flex-row justify-center mt-5">
+              <Text className="text-slate-400 mr-2">
+                ¿Olvidaste tu contraseña?
+              </Text>
+
+              <TouchableOpacity onPress={() => navigation.navigate("RecoveryAccount")}>
+                <Text className="text-background-dark">Recupérala</Text>
+              </TouchableOpacity>
+            </View>
             <StatusBar style="auto" />
           </View>
         )}

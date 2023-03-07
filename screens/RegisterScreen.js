@@ -96,7 +96,7 @@ export default function RegisterScreen({ navigation }) {
   });
 
   const registerValidationSchema = yup.object().shape({
-    name: yup.string().required("El nombre es requiredo"),
+    name: yup.string().required("El nombre es requerido"),
     email: yup
       .string()
       .email("Por favor ingrese un correo valido")
