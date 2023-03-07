@@ -11,7 +11,7 @@ export default function NutritionScreen({ navigation }) {
     });
 
     return (
-        <View className="flex-1 bg-background-ark">
+        <View className="flex-1 bg-background-dark">
             <SafeAreaView className="flex-1">
                 <ScrollView className="flex-1">
                     <View
