@@ -7,8 +7,8 @@ export default function TabBar(props) {
       <Svg
         className=""
         width={Dimensions.get("window").width}
-        height={Dimensions.get("window").height}
-        viewBox="0 0 375 115"
+        height={Dimensions.get("window").height / 6.5}
+        viewBox="0 10 375 115"
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
       >
@@ -39,7 +39,7 @@ export default function TabBar(props) {
         </G>
       </Svg>
 
-      <View className="absolute bottom-0 flex flex-row justify-between items-center mb-3 px-7 w-full">
+      <View className="absolute bottom-1 flex flex-row justify-between items-center mb-3 px-7 w-full">
         {/* LEFT BUTTONS */}
         <View className="flex flex-row items-center">
           {/* CHECK */}
@@ -71,7 +71,8 @@ export default function TabBar(props) {
           </TouchableOpacity>
 
           {/* USER */}
-          <TouchableOpacity className="">
+          <TouchableOpacity 
+          onPress={() => props.action.navigate("Profile")}>
             <Image
               className="h-[25px] w-[25px]"
               source={require("../assets/images/footer_icons/user.png")}
@@ -84,7 +85,7 @@ export default function TabBar(props) {
       {/* HOME */}
       <TouchableOpacity
         onPress={() => props.action.navigate("Menu")}
-        className="p-5 absolute bottom-4 rounded-full bg-background-dark shadow-lg shadow-background-dark"
+        className="p-5 absolute bottom-6 rounded-full bg-background-dark shadow-lg shadow-background-dark"
       >
         <Image
           className="h-[20px] w-[20px]"
