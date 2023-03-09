@@ -9,7 +9,7 @@ import RecoveryAccountScreen from "./screens/RecoveryAccountScreen";
 import MenuScreen from "./screens/MenuScreen";
 import NutritionScreen from "./screens/NutritionScreen";
 import ProfileScreen from "./screens/ProfileScreen";
-
+import HabitDairyScreen from "./screens/HabitDairyScreen";
 
 
 // import TestScreen from "./screens/TestScreen";
@@ -32,6 +32,7 @@ function MainStack() {
       <Stack.Screen name="Menu" component={MenuScreen} />
       <Stack.Screen name="Nutrition" component={NutritionScreen} />
       <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen name="HabitDairy" component={HabitDairyScreen} />
     </Stack.Navigator>
   );
 }

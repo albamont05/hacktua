@@ -43,7 +43,9 @@ export default function TabBar(props) {
         {/* LEFT BUTTONS */}
         <View className="flex flex-row items-center">
           {/* CHECK */}
-          <TouchableOpacity>
+          <TouchableOpacity
+          onPress={() => props.action.navigate("HabitDairy")}
+          >
             <Image
               className="h-[25px] w-[25px]"
               source={require("../assets/images/footer_icons/check.png")}
