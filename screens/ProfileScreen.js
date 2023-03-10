@@ -11,11 +11,16 @@ import { LinearGradient } from "expo-linear-gradient";
 import TabBar from "../components/TabBar";
 // Fonts
 import { useFonts } from "expo-font";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import Spinner from "react-native-loading-spinner-overlay";
 
 export default function ProfileScreen({ navigation }) {
   const [fontsLoaded] = useFonts({
     Roboto: require("../assets/fonts/Roboto-Regular.ttf"),
   });
+
+  const {userInfo, logout, isLoading} = useContext(AuthContext);
 
   return (
     <View className="flex-1 bg-background-dark">
@@ -27,6 +32,11 @@ export default function ProfileScreen({ navigation }) {
               fontFamily: "Roboto",
             }}
           >
+            <Spinner
+                  visible={isLoading}
+                  color="#4AB5A9"
+                  overlayColor="rgba(0, 0, 0, 0.1)"
+                />
             <StatusBar style="auto" />
 
             {/* Shadow box effect */}
@@ -50,10 +60,10 @@ export default function ProfileScreen({ navigation }) {
                 <View className="flex flex-row mt-4 items-center justify-between">
                   <View className="flex flex-column w-[75%]">
                     <Text className="capitalize text-xl italic mb-1">
-                      lorem ipsum
+                      {userInfo.user.name}
                     </Text>
                     <Text className="uppercase tracking-widest italic text-sm text-background-dark font-semibold">
-                      Hombre
+                    {userInfo.user.details.sex  ? userInfo.user.details.sex  : "Por especificar"}
                     </Text>
                   </View>
 
@@ -72,13 +82,13 @@ export default function ProfileScreen({ navigation }) {
 
                 {/* WIDGETS */}
                 <View className="flex flex-row justify-between items-center">
-                  {/* WIDTH */}
+                  {/* WEIGHT */}
                   <View className="flex flex-column">
                     <Text className="uppercase tracking-widest italic text-sm text-background-dark">
                       Peso
                     </Text>
                     <View className="flex flex-row items-end">
-                      <Text className="text-2xl">55</Text>
+                      <Text className="text-2xl">{userInfo.user.details.weight  ? userInfo.user.details.weight  : "0"}</Text>
                       <Text className="ml-1 mb-0.5">kg</Text>
                     </View>
                   </View>
@@ -89,7 +99,7 @@ export default function ProfileScreen({ navigation }) {
                       Edad
                     </Text>
                     <View className="flex flex-row items-end">
-                      <Text className="text-2xl">26</Text>
+                      <Text className="text-2xl">{userInfo.user.calulated_age}</Text>
                       <Text className="ml-1 mb-0.5">yo</Text>
                     </View>
                   </View>
@@ -97,10 +107,10 @@ export default function ProfileScreen({ navigation }) {
                   {/* HEITH */}
                   <View className="flex flex-column">
                     <Text className="uppercase tracking-widest italic text-sm text-background-dark">
-                      Peso
+                      Altura
                     </Text>
                     <View className="flex flex-row items-end">
-                      <Text className="text-2xl">160</Text>
+                      <Text className="text-2xl">{userInfo.user.details.height ? userInfo.user.details.height : "0"}</Text>
                       <Text className="ml-1 mb-0.5">cm</Text>
                     </View>
                   </View>
@@ -194,7 +204,7 @@ export default function ProfileScreen({ navigation }) {
                 {/* SUBMIT BUTTON */}
                 <View className="mb-10">
                   <TouchableOpacity
-                    onPress={() => navigation.navigate("Login")}
+                    onPress={() => {logout(), navigation.navigate("Welcome");}}
                     className="flex items-center mb-5 px-5 py-3.5 bg-background-dark rounded-xl"
                   >
                     <Text className="text-white italic font-semibold">

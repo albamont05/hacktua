@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import "react-native-gesture-handler";
 import {
@@ -17,37 +17,66 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import Moment from "moment";
 import { Formik } from "formik";
 import * as yup from "yup";
+import { AuthContext } from "../context/AuthContext";
+import axios from "axios";
+import Spinner from "react-native-loading-spinner-overlay";
 
 // Fonts
 import { useFonts } from "expo-font";
-
-import { AuthContext } from "../context/AuthContext";
 
 export default function RegisterScreen({ navigation }) {
   const [fontsLoaded] = useFonts({
     Roboto: require("../assets/fonts/Roboto-Regular.ttf"),
   });
 
+  // LOAD COUNTRIES
+  useEffect(() => getCountries(), []);
+
   const [name, setName] = useState("");
-  const [lastname, setLastname] = useState("");
+  const [last_name, setlast_name] = useState("");
   const [email, setEmail] = useState("");
-  const [width, setWidth] = useState("");
+  const [weight, setweight] = useState("");
   const [height, setHeight] = useState("");
-  const [gender, setGender] = React.useState("");
+  const [gender, setGender] = useState("");
   const gender_data = [
     { key: "1", value: "Femenino" },
     { key: "2", value: "Masculino" },
   ];
-  const [country, setCountry] = React.useState("");
-  const [city, setCity] = React.useState("");
-  const country_data = [
-    { key: "1", value: "España" },
-    { key: "2", value: "Francia" },
-  ];
-  const city_data = [
-    { key: "1", value: "Madrid" },
-    { key: "2", value: "Málaga" },
-  ];
+  const [country, setCountry] = useState("");
+  const [countries, setCountries] = useState([]);
+  const [city, setCity] = useState("");
+  const [cities, setCities] = useState([]);
+
+  // GET CITIES FUNCTION
+  function getCountries() {
+    axios
+      .get("https://roadbook.guru/hactuaback/public/api/get-countries")
+      .then((response) => {
+        let newArray = response.data.countries.map((item) => {
+          return { key: item.PaisCodigo, value: item.PaisNombre };
+        });
+        setCountries(newArray);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+
+  // FUCTION TO LOAD CITIES ACCORDING TO COUNTRY
+  function city_data(cityCode) {
+    axios
+      .get(`https://roadbook.guru/hactuaback/public/api/get-cities/${cityCode}`)
+      .then((response) => {
+        let newArray = response.data.cities.map((item) => {
+          return { key: item.CiudadID, value: item.CiudadNombre };
+        });
+        setCities(newArray);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+
   const [phone, setPhone] = useState("");
   const [postal_code, setPostal_code] = useState("");
   const [password, setPassword] = useState("");
@@ -61,14 +90,12 @@ export default function RegisterScreen({ navigation }) {
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
     setShow(false);
-    setDate(currentDate);
     setBirthday(Moment(currentDate).format("DD/MM/YYYY"));
   };
 
   const showMode = (currentMode) => {
     if (Platform.OS === "ios") {
       setShow();
-      // for iOS, add a button that closes the picker
     }
     setMode(currentMode);
   };
@@ -78,13 +105,16 @@ export default function RegisterScreen({ navigation }) {
     showMode("date");
   };
 
+  // DEFINE CONSTANT REGISTER
+  const { isLoading, register } = useContext(AuthContext);
+
   // FORMIK
   const { values, isSubmitting, setFieldValue } = Formik({
     initialValues: {
       name: "",
-      lastname: "",
+      last_name: "",
       email: "",
-      width: "",
+      weight: "",
       height: "",
       gender: "",
       country: "",
@@ -101,6 +131,7 @@ export default function RegisterScreen({ navigation }) {
 
   const registerValidationSchema = yup.object().shape({
     name: yup.string().required("El nombre es requerido"),
+    // birthday: yup.string().required("La fecha de nacimiento es requerida"),
     email: yup
       .string()
       .email("Por favor ingrese un correo valido")
@@ -110,7 +141,6 @@ export default function RegisterScreen({ navigation }) {
       .min(6, "La contraseña debe contener 6 caracteres")
       .required("La contraseña es requerida"),
   });
-  const val = useContext(AuthContext);
 
   return (
     <View className="flex-1">
@@ -118,10 +148,11 @@ export default function RegisterScreen({ navigation }) {
         validationSchema={registerValidationSchema}
         initialValues={{
           name: "",
-          lastname: "",
+          last_name: "",
+          username: "",
           email: "",
           password: "",
-          width: "",
+          weight: "",
           height: "",
           gender: "",
           country: "",
@@ -130,7 +161,25 @@ export default function RegisterScreen({ navigation }) {
           postal_code: "",
           birthday: "",
         }}
-        onSubmit={(values) => navigation.navigate("Menu")}
+        onSubmit={(values) => {
+          values.birthday = Moment(birthday).format("YYYY-MM-DD");
+          register(
+            values.name,
+            values.last_name,
+            values.username,
+            values.email,
+            values.password,
+            values.weight,
+            values.height,
+            values.gender,
+            values.country,
+            values.city,
+            values.phone,
+            values.postal_code,
+            values.birthday,
+            navigation
+          );
+        }}
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
           <SafeAreaView className="flex-1">
@@ -139,6 +188,11 @@ export default function RegisterScreen({ navigation }) {
                 className="flex-1 py-10 items-center justify-center bg-white"
                 style={{ fontFamily: "Roboto" }}
               >
+                <Spinner
+                  visible={isLoading}
+                  color="#4AB5A9"
+                  overlayColor="rgba(0, 0, 0, 0.1)"
+                />
                 <StatusBar style="auto" />
 
                 <Image
@@ -173,16 +227,34 @@ export default function RegisterScreen({ navigation }) {
 
                   <TextInput
                     className="italic font-semibold bg-white shadow-lg shadow-gray-400 rounded-xl px-3 py-2"
-                    onChangeText={handleChange("lastname")}
-                    onBlur={handleBlur("lastname")}
-                    value={values.lastname}
+                    onChangeText={handleChange("last_name")}
+                    onBlur={handleBlur("last_name")}
+                    value={values.last_name}
                   />
-                  {errors.lastname && (
+                  {errors.last_name && (
                     <Text className="mt-2 text-xs text-red-500">
-                      {errors.lastname}
+                      {errors.last_name}
                     </Text>
                   )}
                   {/* END LAST NAME */}
+
+                  {/* USERNAME */}
+                  <Text className="mt-8 mb-2 text-base font-medium italic text-slate-400">
+                    Introduce el usuario (*)
+                  </Text>
+
+                  <TextInput
+                    className="italic font-semibold bg-white shadow-lg shadow-gray-400 rounded-xl px-3 py-2"
+                    onChangeText={handleChange("username")}
+                    onBlur={handleBlur("username")}
+                    value={values.username}
+                  />
+                  {errors.username && (
+                    <Text className="mt-2 text-xs text-red-500">
+                      {errors.username}
+                    </Text>
+                  )}
+                  {/* END USERNAME */}
 
                   {/* EMAIL */}
                   <Text className="mt-8 mb-2 text-base font-medium italic text-slate-400">
@@ -247,13 +319,13 @@ export default function RegisterScreen({ navigation }) {
 
                   <TextInput
                     className="italic font-semibold bg-white shadow-lg shadow-gray-400 rounded-xl px-3 py-2"
-                    onChangeText={handleChange("width")}
-                    onBlur={handleBlur("width")}
-                    value={values.width}
+                    onChangeText={handleChange("weight")}
+                    onBlur={handleBlur("weight")}
+                    value={values.weight}
                   />
-                  {errors.width && (
+                  {errors.weight && (
                     <Text className="mt-2 text-xs text-red-500">
-                      {errors.width}
+                      {errors.weight}
                     </Text>
                   )}
                   {/* END WEIGHT */}
@@ -282,7 +354,12 @@ export default function RegisterScreen({ navigation }) {
                   </Text>
 
                   <SelectList
-                    setSelected={(val) => setGender(val)}
+                    setSelected={(val) => {
+                      setGender(val),
+                        (values.gender = val),
+                        handleBlur("gender"),
+                        handleChange("gender");
+                    }}
                     data={gender_data}
                     save="value"
                     search={false}
@@ -302,10 +379,17 @@ export default function RegisterScreen({ navigation }) {
                   </Text>
 
                   <SelectList
-                    setSelected={(val) => setCountry(val)}
-                    data={country_data}
-                    save="value"
-                    search={false}
+                    setSelected={(val) => {
+                      setCountry(val),
+                        city_data(val),
+                        (values.country = val),
+                        handleBlur("country"),
+                        handleChange("country");
+                    }}
+                    data={countries}
+                    save="key"
+                    search={true}
+                    searchPlaceholder="Buscar"
                     boxStyles={styles.shadow}
                     placeholder="Seleccionar"
                   />
@@ -322,10 +406,16 @@ export default function RegisterScreen({ navigation }) {
                   </Text>
 
                   <SelectList
-                    setSelected={(val) => setCity(val)}
-                    data={city_data}
-                    save="value"
-                    search={false}
+                    setSelected={(val) => {
+                      setCity(val),
+                        (values.city = val),
+                        handleBlur("city"),
+                        handleChange("city");
+                    }}
+                    data={cities}
+                    save="key"
+                    search={true}
+                    searchPlaceholder="Buscar"
                     boxStyles={styles.shadow}
                     placeholder="Seleccionar"
                   />
@@ -374,7 +464,7 @@ export default function RegisterScreen({ navigation }) {
 
                   {/* BIRTHDAY */}
                   <Text className="mt-8 mb-2 text-base font-medium italic text-slate-400">
-                    Fecha de nacimiento
+                    Fecha de nacimiento (*)
                   </Text>
                   <TouchableOpacity
                     onPress={showDatepicker}
@@ -432,7 +522,7 @@ const styles = StyleSheet.create({
   shadow: {
     shadowColor: "#9CA3AF",
     shadowOffset: {
-      width: 0,
+      weight: 0,
       height: 3,
     },
     shadowOpacity: 0.17,

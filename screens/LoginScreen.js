@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import "react-native-gesture-handler";
 import {
@@ -11,6 +11,8 @@ import {
 } from "react-native";
 import { Formik } from "formik";
 import * as yup from "yup";
+import { AuthContext } from "../context/AuthContext";
+import Spinner from "react-native-loading-spinner-overlay";
 
 // Fonts
 import { useFonts } from "expo-font";
@@ -44,6 +46,8 @@ export default function LoginScreen({ navigation }) {
       .required("La contraseña es requerida"),
   });
 
+  const { isLoading, isMessage, login } = useContext(AuthContext);
+
   return (
     <View
       className="flex-1 items-center justify-center bg-white"
@@ -55,10 +59,16 @@ export default function LoginScreen({ navigation }) {
           name: "",
           password: "",
         }}
-        onSubmit={(values) => navigation.navigate("Menu")}
+        onSubmit={(values) => login(values.name, values.password, navigation)}
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
           <View className="flex justify-center items-center">
+            <Spinner
+              visible={isLoading}
+              color="#4AB5A9"
+              overlayColor="rgba(0, 0, 0, 0.1)"
+            />
+
             <Image
               className="mt-6 mb-10 h-[40px] w-[210px]"
               source={require("../assets/images/logo-bg-removed.png")}
@@ -119,6 +129,12 @@ export default function LoginScreen({ navigation }) {
               )}
             </SafeAreaView>
 
+            {isMessage && (
+                <Text className="mt-5 -mb-6 py-2 px-4 bg-red-400 rounded-xl text-xs text-white">
+                  {isMessage}
+                </Text>
+              )}
+
             <TouchableOpacity
               onPress={handleSubmit}
               className="mt-10 bg-background-dark px-20 py-4 rounded-xl"
@@ -131,7 +147,9 @@ export default function LoginScreen({ navigation }) {
                 ¿Olvidaste tu contraseña?
               </Text>
 
-              <TouchableOpacity onPress={() => navigation.navigate("RecoveryAccount")}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("RecoveryAccount")}
+              >
                 <Text className="text-background-dark">Recupérala</Text>
               </TouchableOpacity>
             </View>
