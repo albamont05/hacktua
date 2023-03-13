@@ -33,7 +33,7 @@ function MainStack() {
         <Stack.Screen name="Splash" component={SplashScreen} />
       ) : (
 
-        userInfo.success ? (
+        isLogged ? (
           <>
             <Stack.Screen name="Menu" component={MenuScreen} />
             <Stack.Screen name="Nutrition" component={NutritionScreen} />

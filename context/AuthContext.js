@@ -77,6 +77,7 @@ export const AuthProvider = ({ children }) => {
         } else {
           setIsMessage(userInfo.user);
         }
+        setIsLogged(true);
 
         setIsLoading(false);
         console.log(userInfo);
@@ -88,23 +89,21 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-  const removeUser = async () => {
-    try {
-      await AsyncStorage.removeItem("userInfo");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const removeUser = async () => {
+  //   try {
+  //     await AsyncStorage.removeItem("userInfo");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const logout = () => {
     setIsLoading(true);
     AsyncStorage.removeItem("userInfo");
-    removeUser
     // setUserInfo('');
     setIsLoading(false);
-    console.log("Sesión terminada");
-    // navigation.navigate("Login");
     setIsLogged(false);
+    console.log("Sesión terminada");
   };
 
   const isLoggedIn = async () => {
@@ -116,8 +115,8 @@ export const AuthProvider = ({ children }) => {
       if (userInfo) {
         setUserInfo(userInfo);
         console.log("logeado por storage");
+        setIsLogged(true);
       }
-      setIsLogged(true);
       setSplashLoading(false);
     } catch (e) {
       setSplashLoading(false);
