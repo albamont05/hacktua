@@ -71,6 +71,18 @@ export default function HabitDairyScreen({ navigation }) {
                             <Text className="text-sm text-center font-semibold text-slate-500 italic  mx-2">
                               Mie
                             </Text>
+                            <Text className="text-sm text-center font-semibold text-slate-500 italic  mx-2">
+                              Jue
+                            </Text>
+                            <Text className="text-sm text-center font-semibold text-slate-500 italic  mx-2">
+                              Vie
+                            </Text>
+                            <Text className="text-sm text-center font-semibold text-slate-500 italic  mx-2">
+                              Sáb
+                            </Text>
+                            <Text className="text-sm text-center font-semibold text-slate-500 italic  mx-2">
+                              Dom
+                            </Text>
                           </View>
                         </View>
                         {/* END WEEKENG */}
@@ -93,6 +105,22 @@ export default function HabitDairyScreen({ navigation }) {
                                 </Text>
 
                                 <View className="flex flex-row items-center justify-between px-2 absolute -right-2 ">
+                                  <Image
+                                    className="h-[14px] w-[17px]  mx-3"
+                                    source={require("../assets/images/journey_icons/check_success.png")}
+                                  />
+                                  <Image
+                                    className="h-[14px] w-[14px]  mx-3"
+                                    source={require("../assets/images/journey_icons/check_error.png")}
+                                  />
+                                  <Image
+                                    className="h-[14px] w-[17px]  mx-3"
+                                    source={require("../assets/images/journey_icons/check_success.png")}
+                                  />
+                                  <Image
+                                    className="h-[14px] w-[14px]  mx-3"
+                                    source={require("../assets/images/journey_icons/check_error.png")}
+                                  />
                                   <Image
                                     className="h-[14px] w-[17px]  mx-3"
                                     source={require("../assets/images/journey_icons/check_success.png")}
@@ -129,6 +157,22 @@ export default function HabitDairyScreen({ navigation }) {
                                 </Text>
 
                                 <View className="flex flex-row items-center justify-between px-2 absolute -right-2 ">
+                                <Image
+                                    className="h-[14px] w-[14px]  mx-3"
+                                    source={require("../assets/images/journey_icons/check_error.png")}
+                                  />
+                                  <Image
+                                    className="h-[14px] w-[14px]  mx-3"
+                                    source={require("../assets/images/journey_icons/check_error.png")}
+                                  />
+                                  <Image
+                                    className="h-[14px] w-[17px]  mx-3"
+                                    source={require("../assets/images/journey_icons/check_success.png")}
+                                  />
+                                  <Image
+                                    className="h-[14px] w-[14px]  mx-3"
+                                    source={require("../assets/images/journey_icons/check_error.png")}
+                                  />
                                   <Image
                                     className="h-[14px] w-[17px]  mx-3"
                                     source={require("../assets/images/journey_icons/check_success.png")}
@@ -165,6 +209,18 @@ export default function HabitDairyScreen({ navigation }) {
                                 </Text>
 
                                 <View className="flex flex-row items-center justify-between px-2 absolute -right-2 ">
+                                <Image
+                                    className="h-[14px] w-[17px]  mx-3"
+                                    source={require("../assets/images/journey_icons/check_success.png")}
+                                  />
+                                  <Image
+                                    className="h-[14px] w-[17px]  mx-3"
+                                    source={require("../assets/images/journey_icons/check_success.png")}
+                                  />
+                                  <Image
+                                    className="h-[14px] w-[14px]  mx-3"
+                                    source={require("../assets/images/journey_icons/check_error.png")}
+                                  />
                                   <Image
                                     className="h-[14px] w-[17px]  mx-3"
                                     source={require("../assets/images/journey_icons/check_success.png")}
@@ -201,6 +257,22 @@ export default function HabitDairyScreen({ navigation }) {
                                 </Text>
 
                                 <View className="flex flex-row items-center justify-between px-2 absolute -right-2 ">
+                                <Image
+                                    className="h-[14px] w-[14px]  mx-3"
+                                    source={require("../assets/images/journey_icons/check_error.png")}
+                                  />
+                                  <Image
+                                    className="h-[14px] w-[14px]  mx-3"
+                                    source={require("../assets/images/journey_icons/check_error.png")}
+                                  />
+                                  <Image
+                                    className="h-[14px] w-[17px]  mx-3"
+                                    source={require("../assets/images/journey_icons/check_success.png")}
+                                  />
+                                  <Image
+                                    className="h-[14px] w-[14px]  mx-3"
+                                    source={require("../assets/images/journey_icons/check_error.png")}
+                                  />
                                   <Image
                                     className="h-[14px] w-[17px]  mx-3"
                                     source={require("../assets/images/journey_icons/check_success.png")}
@@ -236,7 +308,23 @@ export default function HabitDairyScreen({ navigation }) {
                                   Ritual de sueño
                                 </Text>
 
-                                <View className="flex flex-row items-center justify-between px-2 absolute -right-2">
+                                <View className="flex flex-row items-center justify-between px-2 absolute -right-2 ">
+                                <Image
+                                    className="h-[14px] w-[14px]  mx-3"
+                                    source={require("../assets/images/journey_icons/check_error.png")}
+                                  />
+                                  <Image
+                                    className="h-[14px] w-[14px]  mx-3"
+                                    source={require("../assets/images/journey_icons/check_error.png")}
+                                  />
+                                  <Image
+                                    className="h-[14px] w-[17px]  mx-3"
+                                    source={require("../assets/images/journey_icons/check_success.png")}
+                                  />
+                                  <Image
+                                    className="h-[14px] w-[14px]  mx-3"
+                                    source={require("../assets/images/journey_icons/check_error.png")}
+                                  />
                                   <Image
                                     className="h-[14px] w-[17px]  mx-3"
                                     source={require("../assets/images/journey_icons/check_success.png")}
@@ -270,7 +358,7 @@ export default function HabitDairyScreen({ navigation }) {
                 </View>
                 {/* END HABITS CARD */}
 
-                {/* END HABITSS */}
+                {/* END HABITS */}
               </LinearGradient>
             </View>
             {/* END BODY */}

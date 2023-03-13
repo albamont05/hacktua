@@ -20,7 +20,7 @@ export default function ProfileScreen({ navigation }) {
     Roboto: require("../assets/fonts/Roboto-Regular.ttf"),
   });
 
-  const {userInfo, logout, isLoading} = useContext(AuthContext);
+  const { userInfo, logout, isLoading } = useContext(AuthContext);
 
   return (
     <View className="flex-1 bg-background-dark">
@@ -33,10 +33,10 @@ export default function ProfileScreen({ navigation }) {
             }}
           >
             <Spinner
-                  visible={isLoading}
-                  color="#4AB5A9"
-                  overlayColor="rgba(0, 0, 0, 0.1)"
-                />
+              visible={isLoading}
+              color="#4AB5A9"
+              overlayColor="rgba(0, 0, 0, 0.1)"
+            />
             <StatusBar style="auto" />
 
             {/* Shadow box effect */}
@@ -60,10 +60,18 @@ export default function ProfileScreen({ navigation }) {
                 <View className="flex flex-row mt-4 items-center justify-between">
                   <View className="flex flex-column w-[75%]">
                     <Text className="capitalize text-xl italic mb-1">
-                      {userInfo.user.name}
+                      {userInfo
+                        ? userInfo.user
+                          ? userInfo.user.name
+                          : "Por definir"
+                        : "Por definir"}
                     </Text>
                     <Text className="uppercase tracking-widest italic text-sm text-background-dark font-semibold">
-                    {userInfo.user.details.sex  ? userInfo.user.details.sex  : "Por especificar"}
+                      {userInfo
+                        ? userInfo.user
+                          ? userInfo.user.details.sex
+                          : "Por especificar"
+                        : "Por especificar"}
                     </Text>
                   </View>
 
@@ -75,8 +83,7 @@ export default function ProfileScreen({ navigation }) {
 
                 {/* DESCRIPTION */}
                 <Text className="my-6 text-sm text-slate-500 italic font-medium">
-                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                  lorem ipsum lorem ipsum lorem ipsum
+                  Descripción
                 </Text>
                 {/* END DESCRIPTION */}
 
@@ -88,7 +95,13 @@ export default function ProfileScreen({ navigation }) {
                       Peso
                     </Text>
                     <View className="flex flex-row items-end">
-                      <Text className="text-2xl">{userInfo.user.details.weight  ? userInfo.user.details.weight  : "0"}</Text>
+                      <Text className="text-2xl">
+                        {userInfo
+                          ? userInfo.user.details.weight
+                            ? userInfo.user.details.weight
+                            : "0"
+                          : "0"}
+                      </Text>
                       <Text className="ml-1 mb-0.5">kg</Text>
                     </View>
                   </View>
@@ -99,7 +112,13 @@ export default function ProfileScreen({ navigation }) {
                       Edad
                     </Text>
                     <View className="flex flex-row items-end">
-                      <Text className="text-2xl">{userInfo.user.calulated_age}</Text>
+                      <Text className="text-2xl">
+                        {userInfo
+                          ? userInfo.user
+                            ? userInfo.user.calulated_age
+                            : "0"
+                          : "0"}
+                      </Text>
                       <Text className="ml-1 mb-0.5">yo</Text>
                     </View>
                   </View>
@@ -110,7 +129,13 @@ export default function ProfileScreen({ navigation }) {
                       Altura
                     </Text>
                     <View className="flex flex-row items-end">
-                      <Text className="text-2xl">{userInfo.user.details.height ? userInfo.user.details.height : "0"}</Text>
+                      <Text className="text-2xl">
+                        {userInfo
+                          ? userInfo.user
+                            ? userInfo.user.details.height
+                            : "0"
+                          : "0"}
+                      </Text>
                       <Text className="ml-1 mb-0.5">cm</Text>
                     </View>
                   </View>
@@ -204,7 +229,7 @@ export default function ProfileScreen({ navigation }) {
                 {/* SUBMIT BUTTON */}
                 <View className="mb-10">
                   <TouchableOpacity
-                    onPress={() => {logout(), navigation.navigate("Welcome");}}
+                    onPress={() => logout()}
                     className="flex items-center mb-5 px-5 py-3.5 bg-background-dark rounded-xl"
                   >
                     <Text className="text-white italic font-semibold">
