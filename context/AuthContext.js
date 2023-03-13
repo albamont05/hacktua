@@ -89,18 +89,9 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-  // const removeUser = async () => {
-  //   try {
-  //     await AsyncStorage.removeItem("userInfo");
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   const logout = () => {
     setIsLoading(true);
     AsyncStorage.removeItem("userInfo");
-    // setUserInfo('');
     setIsLoading(false);
     setIsLogged(false);
     console.log("Sesión terminada");
